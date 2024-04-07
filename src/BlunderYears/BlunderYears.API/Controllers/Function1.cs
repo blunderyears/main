@@ -15,10 +15,16 @@ namespace BlunderYears.API.Controllers
             this.logger = logger;
         }
 
-        [Function("Function1")]
+        [Function(nameof(HelloWorld))]
         public async Task<IActionResult> HelloWorld([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
         {
             return new OkObjectResult("Hello World!");
+        }
+
+        [Function(nameof(HelloWorld2))]
+        public async Task<IActionResult> HelloWorld2([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
+        {
+            return new OkObjectResult("Hello World 2!");
         }
     }
 }
