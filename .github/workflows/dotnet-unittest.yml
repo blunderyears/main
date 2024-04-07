@@ -1,4 +1,4 @@
-name: Build and deploy dotnet core project to Azure Function App - blunderyears
+name: Unit Test
 
 on:
   push:
@@ -11,7 +11,7 @@ env:
   DOTNET_VERSION: '8.0.x'
 
 jobs:
-  build-and-deploy:
+  unittest:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
