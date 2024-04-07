@@ -12,7 +12,7 @@ on:
 env:
   SOLUTION_FOLDER: 'src/BlunderYears'
   PROJECT_NAME: 'BlunderYears.API'
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: './output'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'output'
   DOTNET_VERSION: '8.0.x'
 
 jobs:
@@ -59,4 +59,4 @@ jobs:
           app-name: 'blunderyears'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_40B158A4E6D5432BACA19466D51E55E4 }}
-          
+          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
