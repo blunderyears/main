@@ -6,17 +6,17 @@ namespace BlunderYears.API.Controllers
     using Microsoft.Azure.Functions.Worker;
     using Microsoft.Extensions.Logging;
 
-    public class Function1
+    public class HelloWorld
     {
-        private readonly ILogger<Function1> logger;
+        private readonly ILogger<HelloWorld> logger;
 
-        public Function1(ILogger<Function1> logger)
+        public HelloWorld(ILogger<HelloWorld> logger)
         {
             this.logger = logger;
         }
 
         [Function(nameof(HelloWorld))]
-        public async Task<IActionResult> HelloWorld([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
+        public async Task<IActionResult> HelloWorld1([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
         {
             return new OkObjectResult("Hello World!");
         }
@@ -25,6 +25,12 @@ namespace BlunderYears.API.Controllers
         public async Task<IActionResult> HelloWorld2([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
         {
             return new OkObjectResult("Hello World 2!");
+        }
+
+        [Function(nameof(HelloWorld3))]
+        public async Task<IActionResult> HelloWorld3([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
+        {
+            return new OkObjectResult("Hello World 3!");
         }
     }
 }
