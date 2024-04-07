@@ -3,7 +3,7 @@ name: Build and deploy dotnet core project to Azure Function App - blunderyears
 on:
   push:
     branches:
-      - '*'
+      - '**'
   workflow_dispatch:
 
 env:
