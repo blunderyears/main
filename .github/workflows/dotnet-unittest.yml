@@ -5,7 +5,7 @@ on:
     branches:
       - '**'
     paths:
-      - 'src/BlunderYears'
+      - 'src/BlunderYears/**'
       - '.github/workflows/dotnet-unittest.yml'
   workflow_dispatch:
 
