@@ -4,10 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/BlunderYears'
+      - '.github/workflows/main_blunderyears.yml'
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/BlunderYears'
+  SOLUTION_FOLDER: 'src/BlunderYears'
+  PROJECT_NAME: 'BlunderYears.API'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './output'
   DOTNET_VERSION: '8.0.x'
 
 jobs:
@@ -36,23 +41,16 @@ jobs:
       - name: 'Unit Test'
         shell: bash
         run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          pushd './${{ env.SOLUTION_FOLDER }}'
           dotnet test --configuration Release
           popd
 
       - name: 'Build'
         shell: bash
         run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          dotnet build --configuration Release --output ./output
+          pushd './${{ env.SOLUTION_FOLDER }}/${{ env.PROJECT_NAME }}'
+          dotnet build --configuration Release --output "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}"
           popd
-      
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F7C34647B1854F58A876DFC64D614C2A }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_37D0E9A366F4449D9BDA576ACCC3DF19 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_72EB0DF6223744C58FC4C2279BB26356 }}
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
@@ -60,5 +58,5 @@ jobs:
         with:
           app-name: 'blunderyears'
           slot-name: 'Production'
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_40B158A4E6D5432BACA19466D51E55E4 }}
           
