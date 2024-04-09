@@ -1,0 +1,50 @@
+name: Run DB Migrator
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+    - 'src/BlunderYears/BluderYears.Data.Migrations/Migrations/**'
+    - '.github/workflows/dbmigrator.yml'
+  workflow_dispatch:
+
+env:
+  SOLUTION_FOLDER: 'src/BlunderYears'
+  MIGRATIONS_PROJECT_FOLDER: 'src/BlunderYears/BlunderYears.Migrations'
+  DOTNET_VERSION: '8.0.x' # set this to the dotnet version to use
+
+jobs:
+  build:
+    runs-on: windows-latest
+    name: Run DB Migrator
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core @ Latest
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache Nuget Packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Install dotnet tools
+        run: dotnet tool install --global dotnet-ef
+        shell: pwsh
+
+      - name: Run Migrator
+        run: |
+          Push-Location ${{ env.MIGRATIONS_PROJECT_FOLDER }}
+          dotnet ef migrations bundle
+          dir
+          ./efBundle.exe --connection $Env:StravaConnectionString
+        shell: pwsh
+        env:
+          StravaConnectionString: ${{ secrets.CONNECTION_STRING }}
