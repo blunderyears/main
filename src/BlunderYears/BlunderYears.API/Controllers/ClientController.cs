@@ -17,10 +17,12 @@
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "{*urlPath}")] HttpRequestData request,
             string urlPath)
         {
-            var contentFolder = Path.Combine(Directory.GetCurrentDirectory(), "angular");
+            /*var contentFolder = Path.Combine(Directory.GetCurrentDirectory(), "angular");
             var response2 = request.CreateResponse(System.Net.HttpStatusCode.OK);
             response2.WriteAsJsonAsync(Directory.EnumerateDirectories(Directory.GetCurrentDirectory()).ToList());
-            return response2;
+            return response2;*/
+
+            var contentFolder = Path.Combine(System.Environment.GetEnvironmentVariable("FUNCTIONS_APPLICATION_DIRECTORY"), "angular");
 
             if (!string.IsNullOrWhiteSpace(urlPath))
             {
