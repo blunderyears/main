@@ -4,7 +4,6 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using Azure;
     using Microsoft.AspNetCore.StaticFiles;
     using Microsoft.Azure.Functions.Worker;
     using Microsoft.Azure.Functions.Worker.Http;
@@ -13,7 +12,7 @@
     public class ClientController
     {
         [Function("ZClient")]
-        public static async Task<HttpResponseData> ZClient(
+        public async Task<HttpResponseData> ZClient(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "{*urlPath}")] HttpRequestData request,
             string urlPath)
         {
@@ -22,7 +21,7 @@
             response2.WriteAsJsonAsync(Directory.EnumerateDirectories(Directory.GetCurrentDirectory()).ToList());
             return response2;*/
 
-            var contentFolder = Path.Combine(System.Environment.GetEnvironmentVariable("FUNCTIONS_APPLICATION_DIRECTORY"), "angular");
+            var contentFolder = Path.Combine(Environment.GetEnvironmentVariable("FUNCTIONS_APPLICATION_DIRECTORY"), "angular");
 
             if (!string.IsNullOrWhiteSpace(urlPath))
             {
@@ -45,7 +44,7 @@
                 new FileExtensionContentTypeProvider().TryGetContentType(urlPath, out var contentType);
 
                 var response = request.CreateResponse(System.Net.HttpStatusCode.OK);
-                response.Headers.TryAddWithoutValidation("Content-Type", contentType);
+                response.Headers.TryAddWithoutValidation("Content-Type", contentType ?? "text/javascript");
                 await response.WriteBytesAsync(await File.ReadAllBytesAsync(file));
                 return response;
             }
