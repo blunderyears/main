@@ -16,19 +16,19 @@ namespace BlunderYears.API.Controllers
         }
 
         [Function(nameof(HelloWorld))]
-        public async Task<IActionResult> HelloWorld1([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
+        public async Task<IActionResult> HelloWorld1([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "api/HelloWorld")] HttpRequest req)
         {
             return new OkObjectResult("Hello World!");
         }
 
         [Function(nameof(HelloWorld2))]
-        public async Task<IActionResult> HelloWorld2([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
+        public async Task<IActionResult> HelloWorld2([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "api/HelloWorld2")] HttpRequest req)
         {
             return new OkObjectResult("Hello World 2!");
         }
 
         [Function(nameof(HelloWorld3))]
-        public async Task<IActionResult> HelloWorld3([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
+        public async Task<IActionResult> HelloWorld3([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "api/HelloWorld3")] HttpRequest req)
         {
             return new OkObjectResult("Hello World 3!");
         }

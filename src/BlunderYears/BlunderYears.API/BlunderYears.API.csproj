@@ -8,10 +8,17 @@
 		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Controllers\.editorconfig" />
+		<None Remove="appsettings.json" />
+		<None Remove="Controllers\.editorconfig" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
 		<PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.21.0" />
 		<PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="1.2.1" />
@@ -19,13 +26,14 @@
 		<PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.17.2" />
 		<PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.22.0" />
 		<PackageReference Include="Microsoft.Azure.Functions.Worker.ApplicationInsights" Version="1.2.0" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="2.17.4" />
 		<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.9.28">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
@@ -36,17 +44,8 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
 		</None>
-	</ItemGroup>
-	<ItemGroup>
-		<Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
-	</ItemGroup>
-	<ItemGroup>
-	  <EditorConfigFiles Remove="D:\git\blunderyears\main\src\BlunderYears\BlunderYears.API\Controllers\.editorconfig" />
-	</ItemGroup>
-	<ItemGroup>
-	  <EditorConfigFiles Remove="D:\git\blunderyears\main\src\BlunderYears\BlunderYears.API\Controllers\.editorconfig" />
-	</ItemGroup>
-	<ItemGroup>
-	  <EditorConfigFiles Remove="D:\git\blunderyears\main\src\BlunderYears\BlunderYears.API\Controllers\.editorconfig" />
+		<None Update="angular\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>
