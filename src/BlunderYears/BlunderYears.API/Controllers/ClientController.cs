@@ -1,8 +1,10 @@
 ﻿namespace BlunderYears.API.Controllers
 {
+    using System;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using Azure;
     using Microsoft.AspNetCore.StaticFiles;
     using Microsoft.Azure.Functions.Worker;
     using Microsoft.Azure.Functions.Worker.Http;
@@ -16,6 +18,9 @@
             string urlPath)
         {
             var contentFolder = Path.Combine(Directory.GetCurrentDirectory(), "angular");
+            var response2 = request.CreateResponse(System.Net.HttpStatusCode.OK);
+            response2.WriteAsJsonAsync(Directory.EnumerateDirectories(Directory.GetCurrentDirectory()).ToList());
+            return response2;
 
             if (!string.IsNullOrWhiteSpace(urlPath))
             {
