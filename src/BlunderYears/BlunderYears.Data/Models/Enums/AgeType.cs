@@ -2,9 +2,10 @@
 {
     public enum AgeType
     {
-        Days = 0,
-        Weeks = 1,
-        Months = 2,
-        Years = 3,
+        Hours = 1,
+        Days = 2,
+        Weeks = 3,
+        Months = 4,
+        Years = 5,
     }
 }

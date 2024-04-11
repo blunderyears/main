@@ -12,8 +12,7 @@ if ($LASTEXITCODE -ne 0) {
     dotnet ef migrations bundle --force --verbose
 }
 else {
-    $ConnectionString = $ConnectionString ?? $Env:BlunderYearsConnectionString
-    ./efBundle.exe --connection $ConnectionString
+    ./efBundle.exe
     Remove-Item efBundle.exe
 }
 Pop-Location

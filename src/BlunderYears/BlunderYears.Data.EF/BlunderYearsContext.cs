@@ -1,7 +1,5 @@
 ﻿namespace BlunderYears.Data.EF
 {
-    using System;
-    using System.Diagnostics;
     using BlunderYears.Data.Models;
     using BlunderYears.Data.Models.Photos.Albums;
     using BlunderYears.Data.Models.Photos.Photos;
@@ -48,7 +46,7 @@
             modelBuilder.HasDefaultSchema(BlunderYearsContext.Schema);
 
 #pragma warning disable CA1062 // Validate arguments of public methods
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Activity).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AlbumTable).Assembly);
 #pragma warning restore CA1062 // Validate arguments of public methods
         }
     }

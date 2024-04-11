@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using BlunderYears.Data.Models.Base;
+    using BlunderYears.Data.Models.Photos.Albums.SyncServices.Dropbox;
     using BlunderYears.Data.Models.Photos.Photos;
     using BlunderYears.Data.Models.Users;
 
@@ -25,5 +26,7 @@
         public required string Name { get; set; }
 
         public IList<PhotoTable> Photos { get; set; } = [];
+
+        public IList<DropboxRegistrationTable> DropboxRegistrations { get; set; } = [];
     }
 }

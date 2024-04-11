@@ -3,6 +3,12 @@
 # IDE0290: Use primary constructor
 csharp_style_prefer_primary_constructors = false
 
+# IDE0022: Use block body for method
+csharp_style_expression_bodied_methods = when_on_single_line
+
+# IDE0005: Unused usings
+dotnet_diagnostic.IDE0005.severity = error
+
 # SA1200: Using directives should be placed correctly
 dotnet_diagnostic.SA1200.severity = error
 
@@ -20,3 +26,9 @@ dotnet_diagnostic.SA1600.severity = none
 
 # SA1633: File should have header
 dotnet_diagnostic.SA1633.severity = none
+
+# SA1210: Using directives should be ordered alphabetically by namespace
+dotnet_diagnostic.SA1210.severity = error
+
+# SA1649: File name should match first type name
+dotnet_diagnostic.SA1649.severity = error
